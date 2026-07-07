@@ -1,8 +1,9 @@
 import socket
 import server
+import exemple
 def client():
-    host = '127.0.0.1'
-    port = 6000
+    host = exemple.host
+    port = exemple.port
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     print('Client started (not connected yet).\n Type /help to see available commands, or /connect to connect to the server.')
     while True :
@@ -47,22 +48,5 @@ def client():
             pass
         if command == "/exit":
             pass
-
-print('Client started (not connected yet).\n Type /help to see available commands, or /connect to connect to the server.')
-command = input("\n> ")
-if command == "/help" :
-    print("/help")
-    print("/connect")
-    print("/disconnect")
-    print("/generate_keys <username>")
-    print("/send_text <username> <object_name> <message>")
-    print("/list")
-    print("/get <object_id>")
-    print("/verify <object_id>")
-    print("/verify_all")
-    print("/tamper <object_id>")
-    print("/exit")
-
-
 
 client()

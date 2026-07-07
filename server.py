@@ -29,7 +29,8 @@ class Server:
         print('Message sent')
 
     def receive(self):
-        pass
+        while True:
+            self.server.recv
     
     def close(self):
         self.client.close
