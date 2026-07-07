@@ -21,8 +21,7 @@ class Server:
             client_arrive, addresse = self.server.accept
             print(f"Connected with {addresse}")
             client_arrive.send(f"T'es connecté au server".encode('ascii'))
-            print("normalement c'est sensé accepter")
-    
+            self.server.sendto("oui".encode('ascii'),addresse)
     def send_message(self, msg, type_msg):
         packet = (msg, type_msg)
         self.server.sendall(packet)

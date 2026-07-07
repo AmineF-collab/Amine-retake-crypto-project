@@ -1,9 +1,9 @@
 import socket
 import server
-import exemple
+import configuration
 def client():
-    host = exemple.host
-    port = exemple.port
+    host = configuration.host
+    port = configuration.port
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     print('Client started (not connected yet).\n Type /help to see available commands, or /connect to connect to the server.')
     while True :
