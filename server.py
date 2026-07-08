@@ -1,39 +1,46 @@
 import socket
-host = '127.0.0.1'
-port = 6000
-print("Server started on 127.0.0.1:6000\nWaiting for clients...")
-
-connected = True   
-
-
+import configuration
+from threading import Thread
+host = configuration.host
+port = configuration.port  
 class Server:
     def __init__(self):
         self.host = host
         self.port = port
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    
+        self.client= None
+        
     def start(self):
-        self.server.bind((self.host,port))  
+        self.server.bind((host,port))  
         self.server.listen()
          
     def connect(self):
-        while True:
-            client_arrive, addresse = self.server.accept
-            print(f"Connected with {addresse}")
-            client_arrive.send(f"T'es connecté au server".encode('ascii'))
-            self.server.sendto("oui".encode('ascii'),addresse)
-    def send_message(self, msg, type_msg):
-        packet = (msg, type_msg)
-        self.server.sendall(packet)
-        print('Message sent')
+            self.client, addresse = self.server.accept()
+            print('Received connection request from', addresse)
+            self.client.send("has connected".encode())
+            self.receive(self.client)
 
-    def receive(self):
+    def send_message(self, message:str):
+            self.client.sendall(message.encode())
+
+    def receive(self, client_socket):
         while True:
-            self.server.recv
-    
+            client_message = client_socket.recv(1024).decode()
+            if not client_message:
+                break
+            print("\033[1;31;40m" + "Client:" + client_message + "\033[0m")
+            response = self.commande_handler(client_message)
+            self.send_message(response)
+
+    def commande_handler(self,msg):
+        return f"Message reçu {msg}"
+ 
     def close(self):
-        self.client.close
+        self.server.close
 
 server1 = Server()
 server1.start()
-print("Serveur a start normalement")
+print(f"Server started on {host}:{port}\nWaiting for clients...")
+server1.connect()
+
+
