@@ -1,3 +1,3 @@
-from cryptography.hazmat.primitives import hashes
+import hashlib
 def SHA_256(msg):
-    return hashes.SHA256(msg)
+    return hashlib.sha256(msg)
