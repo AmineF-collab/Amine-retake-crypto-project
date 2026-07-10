@@ -9,7 +9,7 @@ def signature(message:bytes,private_key: RSAPrivateKey):
 
 def verify(message:bytes , signature : bytes, public_key:RSAPublicKey):
     try: 
-        public_key.verify(signature,message,padding.PKCS1v15,hashes.SHA256)
+        public_key.verify(signature,message,padding.PKCS1v15(),hashes.SHA256())
         return True
     except InvalidSignature:
         return False

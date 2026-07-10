@@ -51,7 +51,7 @@ class Server:
         if message_type == type_submit:
              return self.submit_handler(payload)
         elif message_type == type_list:
-             pass
+             return self.list_handler(payload)
         elif message_type == type_get:
              return self.get_handler(payload)
         elif message_type == type_tamper:
@@ -93,6 +93,8 @@ class Server:
          return type_ok,{"status": "OK", "object_id": object_id}
     
     def get_handler(self,payload):
+        if payload.get("command") != "GET_OBJECT":
+            return type_error, {"status": "ERROR", "reason": "command mismatch"}
         object_id = payload.get("object_id")
         object_storage = os.path.join(server_storage, object_id)
         if not os.path.isdir(object_storage):
@@ -113,11 +115,19 @@ class Server:
             "public_key_b64": base64.b64encode(public_key_pem).decode(),
             "metadata": metadata
             }
+    def list_handler(self, payload):
+        if payload.get("command") != "LIST_OBJECTS":
+            return type_error, {"status": "ERROR", "reason": "command mismatch"}
+        objects = []
+        if os.path.isdir(server_storage):
+            for object_id in os.listdir(server_storage):
+                meta_path = os.path.join(server_storage, object_id, "metadata.json")
+                if os.path.isfile(meta_path):
+                    with open(meta_path, "r") as f:
+                        metadata= json.load(f)
+                    objects.append(metadata)
+        return type_ok, {"status": "OK", "objects": objects}
 
-
-
-         
- 
     def close(self):
         self.server.close
 

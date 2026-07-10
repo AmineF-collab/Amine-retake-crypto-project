@@ -63,7 +63,7 @@ class Client():
                 message = balise[3]
                 self.send_text(username,object_name,message)
             if cmd == "/list":
-                pass
+                self.list_objects()
             if cmd == "/get":
                 print("tu as fait un get")
                 if len(balise)<2:
@@ -109,8 +109,8 @@ class Client():
         send_payload = encoder.encode(payload)
         frame.send_msg(self.client, type_submit,send_payload)
 
-        msg_type, raw_response = frame.recv_msg(self.client)
-        response = decoder.decode(raw_response)
+        msg_type, encoded_response = frame.recv_msg(self.client)
+        response = decoder.decode(encoded_response)
         print(response)
         
 
@@ -126,6 +126,20 @@ class Client():
         msg_type, encoded_response = frame.recv_msg(self.client)
         response = decoder.decode(encoded_response)
         return response
+    
+    def list_objects(self):
+        payload = {"command": "LIST_OBJECTS"}
+        send_payload = encoder.encode(payload)
+        frame.send_msg(self.client, type_list, send_payload)
+        msg_type, encoded_response = frame.recv_msg(self.client)
+        response = decoder.decode(encoded_response)
+    
+        objects = response.get("objects", [])
+        if not objects:
+            print("No objects found.")
+        for obj in objects:
+            print(f"- {obj['object_id']} | name={obj['object_name']} | sender={obj['sender']} | tampered={obj['tampered']}")
+        return objects
 
     def receive(self):
         client_message = self.client.recv(1024).decode()
