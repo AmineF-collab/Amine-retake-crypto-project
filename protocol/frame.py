@@ -1,23 +1,22 @@
 import socket
 import struct
 
-def send_msg(sock: socket.socket, data: bytes) -> None:
+def send_msg(sock: socket.socket,message_type:int, data: bytes) -> None:
     header = b"SFX"
-    type = struct.pack(">B", 1)
-    length = struct.pack(">I", 4)
+    type = struct.pack(">B", message_type)
+    length = struct.pack(">I", len(data))
     sock.sendall(header + type + length + data)
 
 def recv_msg(sock: socket.socket) -> bytes:
     raw_header = _recvn(sock, 3)
     if raw_header != b"SFX":
         raise ValueError("Mauvais header de frame")
-    msg_len = struct.unpack(">I", raw_header)[0]
     raw_type = _recvn(sock, 1)
-    msg_len = struct.unpack(">B", raw_type)[0]
+    msg_type = struct.unpack(">B", raw_type)[0]
     raw_length = _recvn(sock, 4)
     msg_len = struct.unpack(">I", raw_length)[0]
     payload = _recvn(sock, msg_len)
-    return msg_len, payload
+    return msg_type, payload
 
 
 def _recvn(sock: socket.socket, n: int) -> bytes:
