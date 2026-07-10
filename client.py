@@ -6,7 +6,7 @@ import sys
 from crypto import rsa_keys, signature
 from cryptography.hazmat.primitives import serialization
 from protocol import frame, encoder, decoder
-from configuration import type_submit
+from configuration import type_submit, type_list, type_get, type_tamper
 host = configuration.host
 port = configuration.port
 
@@ -64,8 +64,14 @@ class Client():
                 self.send_text(username,object_name,message)
             if cmd == "/list":
                 pass
-            if cmd == "/get <object_id>":
-                pass
+            if cmd == "/get":
+                print("tu as fait un get")
+                if len(balise)<2:
+                    print("Utilisez /get <object_id>")
+                    continue
+                response = self.get_object(balise[1])
+                print(response)
+
             if cmd == "/verify <object_id>":
                 pass
             if cmd == "/verify_all":
@@ -112,6 +118,14 @@ class Client():
         private_key, public_key = rsa_keys.generate_keys()
         self.keys[username] = {"private_key": private_key, "public_key": public_key}
         print(f"Key generated for {username}")
+
+    def get_object(self, object_id:str):
+        payload = {"command": "GET_OBJECT", "object_id": object_id}
+        send_payload = encoder.encode(payload)
+        frame.send_msg(self.client, type_get, send_payload)
+        msg_type, encoded_response = frame.recv_msg(self.client)
+        response = decoder.decode(encoded_response)
+        return response
 
     def receive(self):
         client_message = self.client.recv(1024).decode()

@@ -42,8 +42,6 @@ class Server:
             payload = decoder.decode(raw_payload)
             print(f"\033[1;31;40mClient[{msg_type}]: command={payload.get('command')}\033[0m")
 
-            
-            print("DEBUG: entering try block")
             response_type, response_payload = self.commande_handler(msg_type, payload)
             data = encoder.encode(response_payload)
             frame.send_msg(client_socket, response_type, data)
@@ -55,7 +53,7 @@ class Server:
         elif message_type == type_list:
              pass
         elif message_type == type_get:
-             pass
+             return self.get_handler(payload)
         elif message_type == type_tamper:
              pass
         else:
@@ -66,8 +64,8 @@ class Server:
               return type_error, "type and command mismatch"
          
          object_id = str(uuid.uuid4())
-         object_dir = os.path.join(server_storage,object_id)
-         os.makedirs(object_dir, exist_ok=True)
+         object_storage = os.path.join(server_storage,object_id)
+         os.makedirs(object_storage, exist_ok=True)
 
          message_bytes = base64.b64decode(payload["message_b64"])
          signature_bytes = base64.b64decode(payload["signature_b64"])
@@ -82,17 +80,40 @@ class Server:
               "tampered": False
          }
 
-         with open(os.path.join(object_dir, "content.bin"),"wb") as f:
+         with open(os.path.join(object_storage, "content.bin"),"wb") as f:
             f.write(message_bytes)
-         with open(os.path.join(object_dir, "signature.bin"),"wb") as f:
+         with open(os.path.join(object_storage, "signature.bin"),"wb") as f:
             f.write(signature_bytes)
-         with open(os.path.join(object_dir, "public_key.pem"),"wb") as f:
+         with open(os.path.join(object_storage, "public_key.pem"),"wb") as f:
             f.write(public_key_pem.encode())
 
-         with open(os.path.join(object_dir, "metadata.json"), "w") as f:
+         with open(os.path.join(object_storage, "metadata.json"), "w") as f:
               json.dump(metadata, f, indent=2)
 
          return type_ok,{"status": "OK", "object_id": object_id}
+    
+    def get_handler(self,payload):
+        object_id = payload.get("object_id")
+        object_storage = os.path.join(server_storage, object_id)
+        if not os.path.isdir(object_storage):
+            return type_error, {"status": "Error", "reason": "object not found"}
+        with open(os.path.join(object_storage,"content.bin"), "rb") as f:
+            message_bytes = f.read()
+        with open(os.path.join(object_storage,"signature.bin"), "rb") as f:
+           signature_bytes = f.read()
+        with open(os.path.join(object_storage,"public_key.pem"), "rb") as f:
+            public_key_pem = f.read()
+        with open(os.path.join(object_storage,"metadata.json"), "r") as f:
+            metadata = json.load(f)
+        return type_ok,{
+            "status": "OK",
+            "object_id": object_id,
+            "message_b64": base64.b64encode(message_bytes).decode(),
+            "signature_b64": base64.b64encode(signature_bytes).decode(),
+            "public_key_b64": base64.b64encode(public_key_pem).decode(),
+            "metadata": metadata
+            }
+
 
 
          
