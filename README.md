@@ -49,7 +49,7 @@ You must install it in the terminal by running the following command :
 
 # Optional Bonus: Textbook RSA
 
-crypto/textbook_rsa.py is a hand-written implementation of RSA (key generation, encryption/decryption, signing, and verification), without any librairie except hashlib for the hash
+textbook_rsa.py is a hand-written implementation of RSA (key generation, encryption/decryption, signing, and verification), without any librairie except hashlib for the hash
 
 It's a runnable module textbook_rsa.py that reproduces the exact RSA example taught in the course lecture (choosing two primes p and q, computing the modulus and totient, selecting a public exponent, deriving the private exponent via brute-force search for the modular inverse, then encrypting/decrypting and signing/verifying a message). 
 
