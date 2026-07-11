@@ -57,6 +57,8 @@ How it differs from the mandatory path:
 
 It's educational only because the project says that this is not a project about confidentiality "we protect against tampering, not against eavesdropping" so this module is not cryptographically secure against real attacks because key generation only works with small numbers, with real 2048-bit values it would be really slow (and the limited primality check, testing divisibility only up to 97, wouldn't validate some large primes numbers). It exists purely to demonstrate understanding of the math behind RSA, that's exactly why the mandatory workflow relies on the cryptography library instead.
 
+You can test the textbook by running it manually or by ```python textbook_rsa.py``` and there is already a test writen in the textbook.
+
 # How to run the program:
 - First start the server:
 
