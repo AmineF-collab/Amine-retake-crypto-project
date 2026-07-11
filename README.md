@@ -7,7 +7,7 @@ Objectives :
 
 Communication Protocol:
 
-We have to send frame with this format:
+  We have to send frame with this format:
 
 - `HEADER`:  ASCII `SFX`
 - `TYPE`: 1 byte, one of `S` (submit), `L` (list), `G` (get), `T` (tamper), `O` (success), `E` (error)
