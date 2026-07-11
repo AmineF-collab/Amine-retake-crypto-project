@@ -11,7 +11,7 @@ import hashlib
 def verify_prime(p):
     if(p<2):
         return False
-    for petit_nombre_premier in (2,3,5,7,11,13,17,19,23,29,31):
+    for petit_nombre_premier in (2,3,5,7,11,13,17,19,23,29,31,37,41,43,47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97):
         if p == petit_nombre_premier: # Si c'est un petit nombre premier on renvoie true
             return True
         if p % petit_nombre_premier == 0: # Si il est divisible sans reste par un petit nombre premier il n'est pas premier donc False
