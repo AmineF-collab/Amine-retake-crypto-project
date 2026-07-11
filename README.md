@@ -155,7 +155,7 @@ signed_exchange_project/
 
 - Now send two other object with the same method than above
 
-- And we can see all the object we list command
+- And we can see all the object with the list command
 
   use /list
 
