@@ -87,23 +87,23 @@ How to run the program:
 
   <img width="272" height="23" alt="image" src="https://github.com/user-attachments/assets/c7172fb7-7131-44aa-a247-4e88502cd059" />
 
-The object will appear in the folders server_storage:
+  The object will appear in the folders server_storage:
 
-<img width="301" height="115" alt="image" src="https://github.com/user-attachments/assets/31e39ca1-dfbc-4832-8762-4698d0757a9b" />
+  <img width="301" height="115" alt="image" src="https://github.com/user-attachments/assets/31e39ca1-dfbc-4832-8762-4698d0757a9b" />
 
-In the core_payload you can find the information of the object you just sent:
+  In the core_payload you can find the information of the object you just sent:
 
-<img width="322" height="181" alt="image" src="https://github.com/user-attachments/assets/4d00ec7e-0cc9-443c-bbd2-0c2ed122f6ec" />
+  <img width="322" height="181" alt="image" src="https://github.com/user-attachments/assets/4d00ec7e-0cc9-443c-bbd2-0c2ed122f6ec" />
 
-In the message.bin, the message you just sent:
+  In the message.bin, the message you just sent:
 
-<img width="267" height="45" alt="image" src="https://github.com/user-attachments/assets/05665e0a-baae-4767-82aa-19084cbc11d2" />
+  <img width="267" height="45" alt="image" src="https://github.com/user-attachments/assets/05665e0a-baae-4767-82aa-19084cbc11d2" />
 
-In public_key.pem, the public key in pem format:
+  In public_key.pem, the public key in pem format:
 
-<img width="561" height="211" alt="image" src="https://github.com/user-attachments/assets/7f579f38-e4f0-46fc-ad94-3b0ea6c0ef56" />
+  <img width="561" height="211" alt="image" src="https://github.com/user-attachments/assets/7f579f38-e4f0-46fc-ad94-3b0ea6c0ef56" />
 
-In the signature.bin, the signature of the message with the private key you can't see it as if it were text, because it's in raw binary bytes.
+  In the signature.bin, the signature of the message with the private key you can't see it as if it were text, because it's in raw binary bytes.
 
 - Then you can get the object you just send:
 
@@ -119,7 +119,7 @@ In the signature.bin, the signature of the message with the private key you can'
 
   <img width="231" height="21" alt="image" src="https://github.com/user-attachments/assets/bcfe8e1f-b75b-4353-8bf1-528dccfe7304" />
 
-You can see at the end that it is also verified
+  You can see at the end that it is also verified
 
 - You can also verify it directly:
 
