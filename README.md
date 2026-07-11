@@ -1,11 +1,11 @@
-Amine-retake-crypto-project
+# Amine-retake-crypto-project
 
-Objectives : 
+# Objectives : 
 - Implement a TCP Server that stores signed objects on disk, lists them, serves them back on request, and can intentionally tamper with stored content
 - Implement Client that generate keys and then create signed object and send them to the server and that can receive and verify them back
 - Security goal: integrity (detect if a message changed after signing) and origin linking (tie a message to the key that signed it)
 
-Communication Protocol:
+# Communication Protocol:
 
   We have to send frame with this format:
 
@@ -14,7 +14,7 @@ Communication Protocol:
 - `LENGTH`: 4-byte big-endian unsigned int, size of PAYLOAD
 - `PAYLOAD`: UTF-8 JSON, max 1 MB
   
-Project Structure:
+# Project Structure:
 ```
 signed_exchange_project/
  |-- server.py
@@ -39,9 +39,9 @@ signed_exchange_project/
  | | |--public_key.pem 
  | | |--signature.bin
 ``` 
-Requirements: pip install cryptography
+# Requirements: pip install cryptography
 
-How to run the program:
+# How to run the program:
 - First start the server:
 
   use Python server.py in the terminal
