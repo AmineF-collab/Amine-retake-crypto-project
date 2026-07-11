@@ -104,39 +104,69 @@ In the signature.bin, the signature of the message with the private key you can'
   expected :
 
   In the client side:
+
   <img width="953" height="211" alt="image" src="https://github.com/user-attachments/assets/638ef330-b030-4896-b1cb-b6d856c44cdb" />
 
   In the server side :
+
   <img width="231" height="21" alt="image" src="https://github.com/user-attachments/assets/bcfe8e1f-b75b-4353-8bf1-528dccfe7304" />
 
 You can see at the end that it is also verified
+
 - You can also verify it directly:
+
   use /verify <object_id>
+
   expected :
+
   <img width="150" height="72" alt="image" src="https://github.com/user-attachments/assets/af34da6c-9073-4317-8efc-b3423704b8d3" />
-  In the server side :
+
+   In the server side :
+
   <img width="231" height="21" alt="image" src="https://github.com/user-attachments/assets/c10d18dc-91b4-46fd-8230-2463053b896d" />
+
 - To check if we corrupt the message we can use the tamper command :
+
   use /tamper <object_id>
+
   expected:
+
   Client side:
+
   <img width="425" height="37" alt="image" src="https://github.com/user-attachments/assets/1ec153e1-a7da-4db3-bd95-547e7f2d6eee" />
+
   Server side:
+
   <img width="240" height="20" alt="image" src="https://github.com/user-attachments/assets/e331136f-ce32-4472-b279-c6b96a837b15" />
+
 - Now send two other object with the same method than above
+
 - And we can see all the object we list command
+
   use /list
+
   expected:
+
   Client side:
+
   <img width="488" height="80" alt="image" src="https://github.com/user-attachments/assets/9a8e11fd-1641-4fc0-a9bd-79ce53c2744c" />
+
   Server side:
+
   <img width="230" height="19" alt="image" src="https://github.com/user-attachments/assets/20f17c04-3f8c-47a6-a8aa-fefd0b7b090d" />
+
 - Too finish we can verify all the objects:
+
   use /verify_all
+
   expected:
+
   Client side:
+
   <img width="508" height="399" alt="image" src="https://github.com/user-attachments/assets/157a6a5a-fbe7-4a74-9e32-facf13b9aa44" />
+
   Server side:
+
   <img width="240" height="73" alt="image" src="https://github.com/user-attachments/assets/13a0c478-4028-422c-bef3-46914957eb86" />
 
   
