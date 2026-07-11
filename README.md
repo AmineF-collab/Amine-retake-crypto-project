@@ -1,9 +1,9 @@
 # Amine-retake-crypto-project
 
 # Objectives : 
-- Implement a TCP Server that stores signed objects on disk, lists them, serves them back on request, and can intentionally tamper with stored content
-- Implement Client that generate keys and then create signed object and send them to the server and that can receive and verify them back
-- Security goal: integrity (detect if a message changed after signing) and origin linking (tie a message to the key that signed it)
+- Implement a `TCP Server` that stores signed objects on disk, lists them, serves them back on request, and can intentionally tamper with stored content
+- Implement `Client` that generate keys and then create signed object and send them to the server and that can receive and verify them back
+- Security goal: `integrity` (detect if a message changed after signing) and `origin linking` (tie a message to the key that signed it)
 
 # Communication Protocol:
 
