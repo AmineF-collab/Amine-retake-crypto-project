@@ -1,6 +1,5 @@
 import socket
 import configuration
-import uuid
 import time
 import os
 import base64
@@ -38,8 +37,20 @@ class Server:
             except ConnectionError:
                 print("Client disconnected")
                 break
-
-            payload = decoder.decode(encoded_payload)
+            except ValueError as e:
+                error_payload = encoder.encode({"status": "ERROR", "message": str(e)})
+                try:
+                    frame.send_msg(client_socket, type_error, error_payload)
+                except Exception:
+                    pass
+                break    
+            try:
+                payload = decoder.decode(encoded_payload)
+            except json.JSONDecodeError:
+                error_payload = encoder.encode({"status": "ERROR", "message": str(e)})
+                frame.send_msg(client_socket, type_error, error_payload)
+                continue
+            
             print(f"\033[1;31;40mClient[{msg_type}]: command={payload.get('command')}\033[0m")
 
             response_type, response_payload = self.commande_handler(msg_type, payload)
@@ -59,11 +70,29 @@ class Server:
         else:
             return type_error, f"Unknown message type {message_type}"
         
+    def calculate_next_object_id(self):
+        existing = []
+        if os.path.isdir(server_storage):
+            for name in os.listdir(server_storage):
+                if name.startswith("object_"):
+                    num = int(name.split("_")[1])
+                    existing.append(num)                       
+        next_num = max(existing, default=0) + 1
+        return f"object_{next_num}"
+        
     def submit_handler(self, payload):
          if payload.get("command") != "SEND_SIGNED_TEXT":
-              return type_error, "type and command mismatch"
-         
-         object_id = str(uuid.uuid4())
+              return type_error, {"status": "ERROR", "message": "type and command mismatch"}
+         required_fields = ["object_name", "sender", "message_b64", "signature_b64", "public_key_b64", "hash_algorithm"]
+         missing = []
+         for f in required_fields:
+                if f not in payload:
+                    missing.append(f)
+         if missing:
+            return type_error, {"status": "ERROR", "message": f"Missing fields: {', '.join(missing)}"}
+
+    
+         object_id = self.calculate_next_object_id()
          object_storage = os.path.join(server_storage,object_id)
          os.makedirs(object_storage, exist_ok=True)
 

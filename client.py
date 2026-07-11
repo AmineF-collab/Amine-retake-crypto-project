@@ -50,14 +50,14 @@ class Client():
                 print("Disconnected from server")
             if cmd == "/generate_keys":
                 if len(balise)<2:
-                    print(f"Username = {balise[1]}")
+                    print(f"Use /generate_keys <username>")
                     continue
                 username = balise[1]
                 self.generate_keys(username)
 
             if cmd == "/send":
                 if len(balise)<4:
-                    print("Utilisez cette command :/send <username> <object_name> <message>")
+                    print("Use :/send <username> <object_name> <message>")
                     continue
                 username = balise[1]
                 object_name = balise[2]
@@ -67,7 +67,7 @@ class Client():
                 self.list_objects()
             if cmd == "/get":
                 if len(balise)<2:
-                    print("Utilisez /get <object_id>")
+                    print("Use /get <object_id>")
                     continue
                 response = self.get_object(balise[1])
                 print(response)

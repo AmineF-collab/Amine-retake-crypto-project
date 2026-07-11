@@ -10,7 +10,7 @@ def send_msg(sock: socket.socket,message_type:int, data: bytes) -> None:
 def recv_msg(sock: socket.socket) -> bytes:
     raw_header = _recvn(sock, 3)
     if raw_header != b"SFX":
-        raise ValueError("Mauvais header de frame")
+        raise ValueError("Bad header of frame")
     raw_type = _recvn(sock, 1)
     msg_type = struct.unpack(">B", raw_type)[0]
     raw_length = _recvn(sock, 4)
