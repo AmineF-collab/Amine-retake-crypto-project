@@ -39,7 +39,13 @@ signed_exchange_project/
  | | |--public_key.pem 
  | | |--signature.bin
 ``` 
-# Requirements: pip install cryptography
+# Requirements:
+
+This project relies on the `cryptography` library for RSA key generation, signing, and signature verification (used in `crypto/rsa_keys.py` and `crypto/signature.py`).
+
+You must install it in the terminal by running the following command :
+
+```pip install cryptography```
 
 # How to run the program:
 - First start the server:
