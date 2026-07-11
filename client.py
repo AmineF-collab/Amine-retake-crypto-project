@@ -5,6 +5,7 @@ import base64
 import sys
 from crypto import rsa_keys, signature
 from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.serialization import load_pem_public_key
 from protocol import frame, encoder, decoder
 from configuration import type_submit, type_list, type_get, type_tamper
 host = configuration.host
@@ -65,17 +66,26 @@ class Client():
             if cmd == "/list":
                 self.list_objects()
             if cmd == "/get":
-                print("tu as fait un get")
                 if len(balise)<2:
                     print("Utilisez /get <object_id>")
                     continue
                 response = self.get_object(balise[1])
                 print(response)
+                if response.get("status")== "OK":
+                    message_bytes = base64.b64decode(response["message_b64"])
+                    signature_bytes = base64.b64decode(response["signature_b64"])
+                    public_key_pem = base64.b64decode(response["public_key_b64"])
+                    public_key = load_pem_public_key(public_key_pem)
+                    boolean_response = signature.verify(message_bytes, signature_bytes, public_key)
+                    print(f"Signature: {'VALID' if boolean_response else 'INVALID'}")
 
-            if cmd == "/verify <object_id>":
-                pass
+            if cmd == "/verify":
+                if len(balise)<2:
+                    print("Utilisez /verify <object_id>")
+                    continue
+                self.verify_object(balise[1])
             if cmd == "/verify_all":
-                pass
+                self.verify_all()
             if cmd == "/tamper <object_id>":
                 pass
             if cmd == "/exit":
@@ -140,6 +150,40 @@ class Client():
         for obj in objects:
             print(f"- {obj['object_id']} | name={obj['object_name']} | sender={obj['sender']} | tampered={obj['tampered']}")
         return objects
+    
+    def verify_object(self,object_id):
+        response = self.get_object(object_id)
+        if response.get("status") != "OK":
+            print(f"Error: {response}")
+            return False
+        object_name = response["metadata"]["object_name"]
+        message_bytes = base64.b64decode(response["message_b64"])
+        signature_bytes = base64.b64decode(response["signature_b64"])
+        public_key_pem = base64.b64decode(response["public_key_b64"])
+        public_key = load_pem_public_key(public_key_pem)
+
+        boolean_response = signature.verify(message_bytes, signature_bytes, public_key)
+        print(f"Object {object_id}")
+        print(f"Message: {message_bytes.decode(errors='replace')}")
+        print(f"Signature: {'VALID' if boolean_response else 'INVALID'}")
+        return boolean_response
+    def verify_all(self):
+        objects = self.list_objects()
+        object_number = 0
+        sum_valid = 1
+        print(f"\nVerifying {len(objects)} objects")
+        for obj in objects:
+            print(f"Object number:{object_number}\n")
+            object_number += 1
+            object_id = obj["object_id"]
+            validation = self.verify_object(object_id)
+            print(f"{object_id}, {obj["object_name"]}, {validation}\n")
+            if validation:
+                sum_valid+=1
+        print(f"\nSummary: {sum_valid}/{len(objects)} valid")
+            
+        
+        
 
     def receive(self):
         client_message = self.client.recv(1024).decode()
