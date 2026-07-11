@@ -6,7 +6,7 @@ Objectives :
 - Security goal: integrity (detect if a message changed after signing) and origin linking (tie a message to the key that signed it)
 
 Project Structure:
-'''
+```
 signed_exchange_project/
  |-- server.py
  |-- client.py 
@@ -29,7 +29,7 @@ signed_exchange_project/
  | | |--metadata.json 
  | | |--public_key.pem 
  | | |--signature.bin
-''' 
+``` 
 Requirements: pip install cryptography
 
 How to run the program:
