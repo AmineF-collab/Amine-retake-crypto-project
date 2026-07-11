@@ -63,21 +63,25 @@ How to run the program:
 
 - Generate the private and public keys:
 
-  use /generate_keys "<username>"
+  use ```/generate_keys <username>```
 
   expected :
 
-  Key generated for "<username>"
+  Key generated for ```<username>```
 
 - Send signed text:
 
-  use /send_text "<username>" "<object_name>" "<message>"
+  use ```/send_text <username> <object_name>" "<message>```
 
   expected :
 
-  Client side : {'status': 'OK', 'object_id': 'object_1'}
+  Client side :
 
-  Server side : Client[83]: command=SEND_SIGNED_TEXT
+  <img width="348" height="33" alt="image" src="https://github.com/user-attachments/assets/1ecc6aaa-d96f-4d3b-9660-5b13fd05e497" />
+
+  Server side :
+
+  <img width="272" height="23" alt="image" src="https://github.com/user-attachments/assets/c7172fb7-7131-44aa-a247-4e88502cd059" />
 
 The object will appear in the folders server_storage:
 
