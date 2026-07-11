@@ -174,7 +174,7 @@ class Client():
     def verify_all(self):
         objects = self.list_objects()
         object_number = 0
-        sum_valid = 1
+        sum_valid = 0
         print(f"\nVerifying {len(objects)} objects")
         for obj in objects:
             print(f"Object number:{object_number}\n")
@@ -182,7 +182,7 @@ class Client():
             object_id = obj["object_id"]
             validation = self.verify_object(object_id)
             print(f"{object_id}, {obj["object_name"]}, {validation}\n")
-            if validation:
+            if validation == True:
                 sum_valid+=1
         print(f"\nSummary: {sum_valid}/{len(objects)} valid")
 
@@ -194,14 +194,5 @@ class Client():
         response = decoder.decode(encoded_response)
         print(response)
             
-        
-        
-
-    def receive(self):
-        client_message = self.client.recv(1024).decode()
-        if not client_message:
-            return None
-        return client_message.decode()
-    
 Client = Client()
 Client.CLI()

@@ -109,14 +109,14 @@ class Server:
               "tampered": False
          }
 
-         with open(os.path.join(object_storage, "content.bin"),"wb") as f:
+         with open(os.path.join(object_storage, "message.bin"),"wb") as f:
             f.write(message_bytes)
          with open(os.path.join(object_storage, "signature.bin"),"wb") as f:
             f.write(signature_bytes)
          with open(os.path.join(object_storage, "public_key.pem"),"wb") as f:
             f.write(public_key_pem.encode())
 
-         with open(os.path.join(object_storage, "metadata.json"), "w") as f:
+         with open(os.path.join(object_storage, "core_payload.json"), "w") as f:
               json.dump(metadata, f, indent=2)
 
          return type_ok,{"status": "OK", "object_id": object_id}
@@ -129,13 +129,13 @@ class Server:
         
         if not os.path.isdir(object_storage):
             return type_error, {"status": "Error", "message": "object not found"}
-        with open(os.path.join(object_storage,"content.bin"), "rb") as f:
+        with open(os.path.join(object_storage,"message.bin"), "rb") as f:
             message_bytes = f.read()
         with open(os.path.join(object_storage,"signature.bin"), "rb") as f:
            signature_bytes = f.read()
         with open(os.path.join(object_storage,"public_key.pem"), "rb") as f:
             public_key_pem = f.read()
-        with open(os.path.join(object_storage,"metadata.json"), "r") as f:
+        with open(os.path.join(object_storage,"core_payload.json"), "r") as f:
             metadata = json.load(f)
         
         return type_ok,{
@@ -153,7 +153,7 @@ class Server:
         objects = []
         if os.path.isdir(server_storage):
             for object_id in os.listdir(server_storage):
-                meta_path = os.path.join(server_storage, object_id, "metadata.json")
+                meta_path = os.path.join(server_storage, object_id, "core_payload.json")
                 if os.path.isfile(meta_path):
                     with open(meta_path, "r") as f:
                         metadata= json.load(f)
@@ -169,7 +169,7 @@ class Server:
      if not os.path.isdir(object_storage):
         return type_error, {"status": "ERROR", "message": "Object not found."}
 
-     content_path = os.path.join(object_storage, "content.bin")
+     content_path = os.path.join(object_storage, "message.bin")
      with open(content_path, "rb") as f:
         data = bytearray(f.read())
      if len(data) > 0:
@@ -177,7 +177,7 @@ class Server:
      with open(content_path, "wb") as f:
         f.write(data)
 
-     meta_path = os.path.join(object_storage, "metadata.json")
+     meta_path = os.path.join(object_storage, "core_payload.json")
      with open(meta_path, "r") as f:
         metadata = json.load(f)
      metadata["tampered"] = True
