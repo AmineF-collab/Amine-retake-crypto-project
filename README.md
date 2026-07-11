@@ -5,6 +5,13 @@ Objectives :
 - Implement Client that generate keys and then create signed object and send them to the server and that can receive and verify them back
 - Security goal: integrity (detect if a message changed after signing) and origin linking (tie a message to the key that signed it)
 
+Communication Protocol:
+We have to send frame with this format:
+- `HEADER`:  ASCII `SFX`
+- `TYPE`: 1 byte, one of `S` (submit), `L` (list), `G` (get), `T` (tamper), `O` (success), `E` (error)
+- `LENGTH`: 4-byte big-endian unsigned int, size of PAYLOAD
+- `PAYLOAD`: UTF-8 JSON, max 1 MB
+  
 Project Structure:
 ```
 signed_exchange_project/
@@ -68,7 +75,7 @@ How to run the program:
 
 - Send signed text:
 
-  use ```/send_text <username> <object_name>" "<message>```
+  use ```/send_text <username> <object_name> <message>```
 
   expected :
 
@@ -84,19 +91,19 @@ The object will appear in the folders server_storage:
 
 <img width="301" height="115" alt="image" src="https://github.com/user-attachments/assets/31e39ca1-dfbc-4832-8762-4698d0757a9b" />
 
-In the core_payload you can find the information of the object you sent
+In the core_payload you can find the information of the object you just sent:
 
 <img width="322" height="181" alt="image" src="https://github.com/user-attachments/assets/4d00ec7e-0cc9-443c-bbd2-0c2ed122f6ec" />
 
-In the message.bin, the message you sent
+In the message.bin, the message you just sent:
 
 <img width="267" height="45" alt="image" src="https://github.com/user-attachments/assets/05665e0a-baae-4767-82aa-19084cbc11d2" />
 
-In public_key.pem, the public key in pem format
+In public_key.pem, the public key in pem format:
 
 <img width="561" height="211" alt="image" src="https://github.com/user-attachments/assets/7f579f38-e4f0-46fc-ad94-3b0ea6c0ef56" />
 
-In the signature.bin, the signature of the message with the private key you can't see it as if it were text, because it's raw binary bytes.
+In the signature.bin, the signature of the message with the private key you can't see it as if it were text, because it's in raw binary bytes.
 
 - Then you can get the object you just send:
 
@@ -169,6 +176,8 @@ You can see at the end that it is also verified
   Server side:
 
   <img width="240" height="73" alt="image" src="https://github.com/user-attachments/assets/13a0c478-4028-422c-bef3-46914957eb86" />
+
+- If you finished you can now exit the program or disconnect the client with ```/exit or /disconnect```
 
   
   
