@@ -55,7 +55,7 @@ How to run the program:
 
   expected :
 
-  <img width="383" height="55" alt="image" src="https://github.com/user-attachments/assets/992d97db-a070-4c72-87cb-6bd4c809bf9a" />
+  <img width="375" height="17" alt="image" src="https://github.com/user-attachments/assets/cb2831d1-7d14-45e4-bd81-d67d91659a08" />
 
 - Generate the private and public keys:
 
