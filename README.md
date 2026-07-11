@@ -64,6 +64,8 @@ signed_exchange_project/
 
   expected :
 
+  Server side :
+
   <img width="375" height="17" alt="image" src="https://github.com/user-attachments/assets/cb2831d1-7d14-45e4-bd81-d67d91659a08" />
 
 - Generate the private and public keys:
@@ -72,10 +74,12 @@ signed_exchange_project/
 
   expected :
 
+  Client side :
+
   <img width="207" height="36" alt="image" src="https://github.com/user-attachments/assets/5140da7d-02fc-4ec5-9343-5eea1d6e3d1f" />
 
 
-- Send signed text:
+- Send signed text :
 
   use ```/send_text <username> <object_name> <message>```
 
@@ -89,31 +93,31 @@ signed_exchange_project/
 
   <img width="272" height="23" alt="image" src="https://github.com/user-attachments/assets/c7172fb7-7131-44aa-a247-4e88502cd059" />
 
-  The object will appear in the folders server_storage:
+  The object will appear in the folders server_storage :
 
   <img width="301" height="115" alt="image" src="https://github.com/user-attachments/assets/31e39ca1-dfbc-4832-8762-4698d0757a9b" />
 
-  In the core_payload you can find the information of the object you just sent:
+  In the core_payload you can find the information of the object you just sent :
 
   <img width="322" height="181" alt="image" src="https://github.com/user-attachments/assets/4d00ec7e-0cc9-443c-bbd2-0c2ed122f6ec" />
 
-  In the message.bin, the message you just sent:
+  In the message.bin, the message you just sent :
 
   <img width="267" height="45" alt="image" src="https://github.com/user-attachments/assets/05665e0a-baae-4767-82aa-19084cbc11d2" />
 
-  In public_key.pem, the public key in pem format:
+  In public_key.pem, the public key in pem format :
 
   <img width="561" height="211" alt="image" src="https://github.com/user-attachments/assets/7f579f38-e4f0-46fc-ad94-3b0ea6c0ef56" />
 
   In the signature.bin, the signature of the message with the private key you can't see it as if it were text, because it's in raw binary bytes.
 
-- Then you can get the object you just send:
+- Then you can get the object you just send :
 
   with /get <object_id> --> use the object_id you received after you sent the object
 
   expected :
 
-  In the client side:
+  In the client side :
 
   The command /get object_id retrieves the stored object from the server (message, signature, and public key, all Base64-encoded, plus the metadata)
 
@@ -127,7 +131,7 @@ signed_exchange_project/
 
   You can see at the end that it is also verified
 
-- You can also verify it directly:
+- You can also verify it directly :
 
   use /verify <object_id>
 
@@ -145,43 +149,43 @@ signed_exchange_project/
 
   use /tamper <object_id>
 
-  expected:
+  expected :
 
-  Client side:
+  Client side :
 
   <img width="425" height="37" alt="image" src="https://github.com/user-attachments/assets/1ec153e1-a7da-4db3-bd95-547e7f2d6eee" />
 
-  Server side:
+  Server side :
 
   <img width="240" height="20" alt="image" src="https://github.com/user-attachments/assets/e331136f-ce32-4472-b279-c6b96a837b15" />
 
 - Now send two other object with the same method than above
 
-- And we can see all the object with the list command
+- And we can see all the object with the list command :
 
   use /list
 
-  expected:
+  expected :
 
-  Client side:
+  Client side :
 
   <img width="488" height="80" alt="image" src="https://github.com/user-attachments/assets/9a8e11fd-1641-4fc0-a9bd-79ce53c2744c" />
 
-  Server side:
+  Server side :
 
   <img width="230" height="19" alt="image" src="https://github.com/user-attachments/assets/20f17c04-3f8c-47a6-a8aa-fefd0b7b090d" />
 
-- Too finish we can verify all the objects:
+- Too finish we can verify all the objects :
 
   use /verify_all
 
-  expected:
+  expected :
 
-  Client side:
+  Client side :
 
   <img width="508" height="399" alt="image" src="https://github.com/user-attachments/assets/157a6a5a-fbe7-4a74-9e32-facf13b9aa44" />
 
-  Server side:
+  Server side :
 
   Verify_all is the verify function but with all the object so it called the command list first to have all the object and then verify each object
 
