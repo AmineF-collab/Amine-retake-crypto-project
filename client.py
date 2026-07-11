@@ -55,7 +55,7 @@ class Client():
                 username = balise[1]
                 self.generate_keys(username)
 
-            if cmd == "/send":
+            if cmd == "/send_text":
                 if len(balise)<4:
                     print("Use :/send <username> <object_name> <message>")
                     continue
@@ -173,12 +173,9 @@ class Client():
     
     def verify_all(self):
         objects = self.list_objects()
-        object_number = 0
         sum_valid = 0
         print(f"\nVerifying {len(objects)} objects")
         for obj in objects:
-            print(f"Object number:{object_number}\n")
-            object_number += 1
             object_id = obj["object_id"]
             validation = self.verify_object(object_id)
             print(f"{object_id}, {obj["object_name"]}, {validation}\n")
