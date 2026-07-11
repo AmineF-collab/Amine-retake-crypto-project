@@ -6,7 +6,9 @@ Objectives :
 - Security goal: integrity (detect if a message changed after signing) and origin linking (tie a message to the key that signed it)
 
 Communication Protocol:
+
 We have to send frame with this format:
+
 - `HEADER`:  ASCII `SFX`
 - `TYPE`: 1 byte, one of `S` (submit), `L` (list), `G` (get), `T` (tamper), `O` (success), `E` (error)
 - `LENGTH`: 4-byte big-endian unsigned int, size of PAYLOAD
