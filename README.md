@@ -7,7 +7,7 @@ Objectives :
 
 Project Structure:
 signed_exchange_project/
- 
+''' 
  |-- server.py
  |-- client.py 
  |-- configuration.py 
@@ -29,7 +29,7 @@ signed_exchange_project/
  | | |--metadata.json 
  | | |--public_key.pem 
  | | |--signature.bin
- 
+''' 
 Requirements: pip install cryptography
 
 How to run the program:
