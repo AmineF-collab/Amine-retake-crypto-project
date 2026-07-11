@@ -1,6 +1,6 @@
 import socket
 import struct
-
+max_payload=1_048_576
 def send_msg(sock: socket.socket,message_type:int, data: bytes) -> None:
     header = b"SFX"
     type = struct.pack(">B", message_type)
@@ -15,6 +15,8 @@ def recv_msg(sock: socket.socket) -> bytes:
     msg_type = struct.unpack(">B", raw_type)[0]
     raw_length = _recvn(sock, 4)
     msg_len = struct.unpack(">I", raw_length)[0]
+    if msg_len > max_payload:
+        raise ValueError("Payload too large")
     payload = _recvn(sock, msg_len)
     return msg_type, payload
 

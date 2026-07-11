@@ -86,8 +86,11 @@ class Client():
                 self.verify_object(balise[1])
             if cmd == "/verify_all":
                 self.verify_all()
-            if cmd == "/tamper <object_id>":
-                pass
+            if cmd == "/tamper":
+                if len(balise)<2:
+                    print("Usage: /tamper <object_id>")
+                    continue
+                self.tamper_object(balise[1])
             if cmd == "/exit":
                 self.client.close()
                 sys.exit()
@@ -167,6 +170,7 @@ class Client():
         print(f"Message: {message_bytes.decode(errors='replace')}")
         print(f"Signature: {'VALID' if boolean_response else 'INVALID'}")
         return boolean_response
+    
     def verify_all(self):
         objects = self.list_objects()
         object_number = 0
@@ -181,6 +185,14 @@ class Client():
             if validation:
                 sum_valid+=1
         print(f"\nSummary: {sum_valid}/{len(objects)} valid")
+
+    def tamper_object(self, object_id: str):
+        payload = {"command": "TAMPER_OBJECT", "object_id": object_id}
+        send_payload = encoder.encode(payload)
+        frame.send_msg(self.client, type_tamper, send_payload)
+        msg_type, encoded_response = frame.recv_msg(self.client)
+        response = decoder.decode(encoded_response)
+        print(response)
             
         
         
