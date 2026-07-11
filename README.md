@@ -9,45 +9,25 @@ Project Structure:
 signed_exchange_project/
  
  |-- server.py
- 
- |-- client.py
- 
- |-- configuration.py
- 
+ |-- client.py 
+ |-- configuration.py 
  |
- 
- |-- protocol/
- 
+ |-- protocol/ 
  | |-- frame.py
- 
  | |-- encoder.py
- 
- | |-- decoder.py
- 
- |
- 
- |-- crypto/
- 
- | |-- hashing.py
- 
- | |-- rsa_keys.py
- 
- | |-- signature.py
- 
- |
- 
- |-- server_storage/
- 
- (If an object was already sent)
- 
- | |-- object_1/
- 
- | | |--message.bin
- 
- | | |--metadata.json
- 
- | | |--public_key.pem
- 
+ | |-- decoder.py 
+ | 
+ |-- crypto/ 
+ | |-- hashing.py 
+ | |-- rsa_keys.py 
+ | |-- signature.py 
+ | 
+ |-- server_storage/ 
+ (If an object was already sent) 
+ | |-- object_1/ 
+ | | |--message.bin 
+ | | |--metadata.json 
+ | | |--public_key.pem 
  | | |--signature.bin
  
 Requirements: pip install cryptography
@@ -83,15 +63,15 @@ How to run the program:
 
 - Generate the private and public keys:
 
-  use /generate_keys <username>
+  use /generate_keys "<username>"
 
   expected :
 
-  Key generated for <username>
+  Key generated for "<username>"
 
 - Send signed text:
 
-  use /send_text <username> <object_name> <message>
+  use /send_text "<username>" "<object_name>" "<message>"
 
   expected :
 
@@ -119,7 +99,7 @@ In the signature.bin, the signature of the message with the private key you can'
 
 - Then you can get the object you just send:
 
-  with /get <object_id> --< use the object_id you received after you sent the object
+  with /get <object_id> --> use the object_id you received after you sent the object
 
   expected :
 
