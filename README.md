@@ -39,9 +39,7 @@ How to run the program:
 
   expected :
 
-  Server started on 127.0.0.1:6000
-
-  Waiting for clients...
+  <img width="264" height="33" alt="image" src="https://github.com/user-attachments/assets/2609ea00-d166-4fc7-867c-70c5e71f75cb" />
 
 - Then start the client :
 
@@ -49,9 +47,7 @@ How to run the program:
 
   expected :
 
-  Client started (not connected yet).
-
-  Type /help to see available commands, or /connect to connect to the server.
+  <img width="540" height="37" alt="image" src="https://github.com/user-attachments/assets/ea76c491-ff76-4ec4-afdf-de48f4933a61" />
 
 - Connect the client to the server:
 
@@ -59,7 +55,7 @@ How to run the program:
 
   expected :
 
-  Received connection request from ('127.0.0.1', 65061) ---> in the server side
+  <img width="383" height="55" alt="image" src="https://github.com/user-attachments/assets/992d97db-a070-4c72-87cb-6bd4c809bf9a" />
 
 - Generate the private and public keys:
 
@@ -67,7 +63,8 @@ How to run the program:
 
   expected :
 
-  Key generated for ```<username>```
+  <img width="207" height="36" alt="image" src="https://github.com/user-attachments/assets/5140da7d-02fc-4ec5-9343-5eea1d6e3d1f" />
+
 
 - Send signed text:
 
