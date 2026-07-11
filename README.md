@@ -135,7 +135,9 @@ signed_exchange_project/
 
   <img width="150" height="72" alt="image" src="https://github.com/user-attachments/assets/af34da6c-9073-4317-8efc-b3423704b8d3" />
 
-   In the server side :
+  In the server side :
+
+  Verify call the get command to get the object and then verify it localy that's why on the server side only the command get is called
 
   <img width="231" height="21" alt="image" src="https://github.com/user-attachments/assets/c10d18dc-91b4-46fd-8230-2463053b896d" />
 
@@ -180,6 +182,10 @@ signed_exchange_project/
   <img width="508" height="399" alt="image" src="https://github.com/user-attachments/assets/157a6a5a-fbe7-4a74-9e32-facf13b9aa44" />
 
   Server side:
+
+  Verify_all is the verify function but with all the object so it called the command list first to have all the object and then verify each object
+
+  here 3 object so 3 time verify
 
   <img width="240" height="73" alt="image" src="https://github.com/user-attachments/assets/13a0c478-4028-422c-bef3-46914957eb86" />
 
