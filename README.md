@@ -47,7 +47,7 @@ You must install it in the terminal by running the following command :
 
 ```pip install cryptography```
 
-#Optional Bonus: Textbook RSA
+# Optional Bonus: Textbook RSA
 
 crypto/textbook_rsa.py is a hand-written implementation of RSA (key generation, encryption/decryption, signing, and verification), without any librairie except hashlib for the hash
 
