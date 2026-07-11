@@ -47,6 +47,16 @@ You must install it in the terminal by running the following command :
 
 ```pip install cryptography```
 
+#Optional Bonus: Textbook RSA
+
+crypto/textbook_rsa.py is a hand-written implementation of RSA (key generation, encryption/decryption, signing, and verification), without any librairie except hashlib for the hash
+
+It's a runnable module textbook_rsa.py that reproduces the exact RSA example taught in the course lecture (choosing two primes p and q, computing the modulus and totient, selecting a public exponent, deriving the private exponent via brute-force search for the modular inverse, then encrypting/decrypting and signing/verifying a message). 
+
+How it differs from the mandatory path:
+
+It's educational only because the project says that this is not a project about confidentiality "we protect against tampering, not against eavesdropping" so this module is not cryptographically secure against real attacks because key generation only works with small numbers, with real 2048-bit values it would be really slow (and the limited primality check, testing divisibility only up to 97, wouldn't validate some large primes numbers). It exists purely to demonstrate understanding of the math behind RSA, that's exactly why the mandatory workflow relies on the cryptography library instead.
+
 # How to run the program:
 - First start the server:
 
