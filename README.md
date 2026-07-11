@@ -115,6 +115,10 @@ signed_exchange_project/
 
   In the client side:
 
+  The command /get object_idretrieves the stored object from the server (message, signature, and public key, all Base64-encoded, plus the metadata)
+
+  and verifies the signature    locally on the client, showing whether it is VALID or INVALID.
+
   <img width="953" height="211" alt="image" src="https://github.com/user-attachments/assets/638ef330-b030-4896-b1cb-b6d856c44cdb" />
 
   In the server side :
